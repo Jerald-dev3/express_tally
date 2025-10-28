@@ -412,8 +412,13 @@ def supplier():
 @frappe.whitelist()
 def account():
     payload = json.loads(frappe.request.data)
-    with open('abdul.json','w') as f:
+
+    data = payload
+    data["account"] = data.pop('data')
+    data['type'] = "account"
+    with open('accounts.json','w') as f:
         json.dump(payload,f)
+    
     accounts = payload['account']
 
     tally_response = []
